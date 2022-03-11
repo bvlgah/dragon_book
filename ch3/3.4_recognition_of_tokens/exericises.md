@@ -2,7 +2,9 @@
 
 ## Exericise 3.4.9 *Fibonacci strings*
 
-**d)** Show that the failure function for any <img src="https://i.upmath.me/svg/s_n" alt="s_n" /> can be expressed by
+### d)
+
+Show that the failure function for any <img src="https://i.upmath.me/svg/s_n" alt="s_n" /> can be expressed by
 <img src="https://i.upmath.me/svg/f%20%5Cleft(%201%20%5Cright)%20%3D%20f%20%5Cleft(%202%20%5Cright)%20%3D%200" alt="f \left( 1 \right) = f \left( 2 \right) = 0" />, and for
 <img src="https://i.upmath.me/svg/2%20%3C%20j%20%5Cle%20%5Cleft%7C%20s_n%20%5Cright%7C" alt="2 &lt; j \le \left| s_n \right|" />, <img src="https://i.upmath.me/svg/f%20%5Cleft(%20j%20%5Cright)" alt="f \left( j \right)" /> is
 <img src="https://i.upmath.me/svg/j%20-%20%5Cleft%7C%20s_%7Bk%20-%201%7D%20%5Cright%7C" alt="j - \left| s_{k - 1} \right|" />, where <img src="https://i.upmath.me/svg/k" alt="k" /> is the largest integer such
