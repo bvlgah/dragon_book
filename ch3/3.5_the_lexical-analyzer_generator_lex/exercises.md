@@ -28,3 +28,16 @@ All nonletters are copied intact to the output.
 
 [pig\_latin.l](/ch3/3.5_the_lexical-analyzer_generator_lex/pig_latin.l)
 
+## Exercise 3.5.5
+
+In SQL, keywords and identifiers are case-insensitive.
+Write a Lex program that recognizes the keywords **SELECT**, **FROM**,
+and **WHERE** (in any combination of capital and lower-case letters),
+and token **ID**, which for the purposes of this exercise you may take to be
+any sequence of letters and digits, beginning with a letter. You need not
+install identifiers in a symbol table, but tell how the "install" functiou
+would differ from that described for case-sensitive identifiers as
+in Fig. 3.23.
+
+[sql.l](/ch3/3.5_the_lexical-analyzer_generator_lex/pig_latin.l)
+
