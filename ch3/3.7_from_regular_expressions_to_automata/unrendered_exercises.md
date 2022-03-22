@@ -42,7 +42,7 @@ a) Fig. 3.29.
 |   b   | {0, 1, 2, 3}  |
 
 Because final states include the accepting state 3, the input
-string <img src="https://i.upmath.me/svg/a%20a%20b%20b" alt="a a b b" /> is accepted.
+string $$a a b b$$ is accepted.
 
 b) Fig. 3.30.
 
