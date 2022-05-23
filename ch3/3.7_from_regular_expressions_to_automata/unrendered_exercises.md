@@ -123,14 +123,14 @@ $$
 | 6         | $$\emptyset$$ | $$\emptyset$$ | {7, 9}        |
 | 7         | $$\emptyset$$ | {8}           | $$\emptyset$$ |
 | 8         | $$\emptyset$$ | $$\emptyset$$ | {7, 9}        |
-| 9         | $$\emptyset$$ | $$\emptyset$$ | {10}          |
+| 9         | $$\emptyset$$ | $$\emptyset$$ | {1, 10}       |
 | 10        | $$\emptyset$$ | $$\emptyset$$ | $$\emptyset$$ |
 
 | NFA State                    | DFA State | a       | b   |
 | ---------------------------- | --------- | ------- | --- |
 | {0, 1, 2, 3, 4, 6, 7, 9, 10} | A         | B       | C   |
-| {5, 6, 7, 9, 10}             | B         | invalid | C   |
-| {7, 8, 9, 10}                | C         | invalid | C   |
+| {1, 2, 3, 4, 5, 6, 7, 9, 10} | B         | B       | C   |
+| {1, 2, 3, 4, 6, 7, 8, 9, 10} | C         | B       | C   |
 
 d) $$(a | b)^* a b b (a | b)^*$$
 

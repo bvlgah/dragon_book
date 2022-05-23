@@ -123,14 +123,14 @@ c) <img src="https://i.upmath.me/svg/%0A%5Cdelimitershortfall%3D-1pt%0A%5Cleft(%
 | 6         | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | {7, 9}        |
 | 7         | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | {8}           | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> |
 | 8         | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | {7, 9}        |
-| 9         | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | {10}          |
+| 9         | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | {1, 10}       |
 | 10        | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> | <img src="https://i.upmath.me/svg/%5Cemptyset" alt="\emptyset" /> |
 
 | NFA State                    | DFA State | a       | b   |
 | ---------------------------- | --------- | ------- | --- |
 | {0, 1, 2, 3, 4, 6, 7, 9, 10} | A         | B       | C   |
-| {5, 6, 7, 9, 10}             | B         | invalid | C   |
-| {7, 8, 9, 10}                | C         | invalid | C   |
+| {1, 2, 3, 4, 5, 6, 7, 9, 10} | B         | B       | C   |
+| {1, 2, 3, 4, 6, 7, 8, 9, 10} | C         | B       | C   |
 
 d) <img src="https://i.upmath.me/svg/(a%20%7C%20b)%5E*%20a%20b%20b%20(a%20%7C%20b)%5E*" alt="(a | b)^* a b b (a | b)^*" />
 
