@@ -18,7 +18,7 @@ $$S \Rightarrow SS* \Rightarrow Sa* \Rightarrow SS+a* \Rightarrow Sa+a* \Rightar
 
 c) Give a parse tree for the string.
 
-![parse tree](assets/4_2_1.svg)
+![4.2.1 parse tree](assets/4_2_1_parse_tree.png)
 
 d) Is the grammar ambiguous or unambiguous? Justify your answer.
 
