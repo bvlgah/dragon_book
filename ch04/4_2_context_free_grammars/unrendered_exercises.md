@@ -129,3 +129,35 @@ This grammar is ambiguous, and it can generate strings with equal number of a's 
 
 g) It is unambiguous, and recognizes boolean expressions.
 
+## 4.2.3
+
+Design grammars for the following languages:
+
+a) The set of all strings of 0s and 1s such that every 0 is immediately
+followed by at least one 1.
+
+$$S \rightarrow 1S | 01S | \epsilon$$
+
+b) The set of all strings of 0s and 1s that are palindromes; that is,
+the string reads the same backward as forward.
+
+$$S \rightarrow 1S1 | 0S0 | 1 | 0 | \epsilon$$
+
+c) The set of all strings of 0s and 1s with an equal number of 0s and 1s.
+
+$$S \rightarrow 0S1S | 1S0S | \epsilon$$
+
+d) The set of all strings of 0s and 1s with an unequal number of 0s and 1s.
+
+$$S \rightarrow 1T | 0T$$
+
+$$T \rightarrow 0S1S | 1S0S | \epsilon$$
+
+e) The set of all strings of 0s and 1s in which 011 does not appear as a substring.
+
+$$S \rightarrow 1S | X$$
+
+$$X \rightarrow 0Z1X | \epsilon$$
+
+$$Z \rightarrow 0Z | \epsilon$$
+

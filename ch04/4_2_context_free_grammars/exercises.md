@@ -129,3 +129,35 @@ This grammar is ambiguous, and it can generate strings with equal number of a's 
 
 g) It is unambiguous, and recognizes boolean expressions.
 
+## 4.2.3
+
+Design grammars for the following languages:
+
+a) The set of all strings of 0s and 1s such that every 0 is immediately
+followed by at least one 1.
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%201S%20%7C%2001S%20%7C%20%5Cepsilon" alt="S \rightarrow 1S | 01S | \epsilon" />
+
+b) The set of all strings of 0s and 1s that are palindromes; that is,
+the string reads the same backward as forward.
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%201S1%20%7C%200S0%20%7C%201%20%7C%200%20%7C%20%5Cepsilon" alt="S \rightarrow 1S1 | 0S0 | 1 | 0 | \epsilon" />
+
+c) The set of all strings of 0s and 1s with an equal number of 0s and 1s.
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%200S1S%20%7C%201S0S%20%7C%20%5Cepsilon" alt="S \rightarrow 0S1S | 1S0S | \epsilon" />
+
+d) The set of all strings of 0s and 1s with an unequal number of 0s and 1s.
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%201T%20%7C%200T" alt="S \rightarrow 1T | 0T" />
+
+<img src="https://i.upmath.me/svg/T%20%5Crightarrow%200S1S%20%7C%201S0S%20%7C%20%5Cepsilon" alt="T \rightarrow 0S1S | 1S0S | \epsilon" />
+
+e) The set of all strings of 0s and 1s in which 011 does not appear as a substring.
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%201S%20%7C%20X" alt="S \rightarrow 1S | X" />
+
+<img src="https://i.upmath.me/svg/X%20%5Crightarrow%200Z1X%20%7C%20%5Cepsilon" alt="X \rightarrow 0Z1X | \epsilon" />
+
+<img src="https://i.upmath.me/svg/Z%20%5Crightarrow%200Z%20%7C%20%5Cepsilon" alt="Z \rightarrow 0Z | \epsilon" />
+
