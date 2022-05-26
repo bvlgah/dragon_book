@@ -161,3 +161,35 @@ e) The set of all strings of 0s and 1s in which 011 does not appear as a substri
 
 <img src="https://i.upmath.me/svg/Z%20%5Crightarrow%200Z%20%7C%20%5Cepsilon" alt="Z \rightarrow 0Z | \epsilon" />
 
+## 4.2.4
+
+Proof:
+
+<img src="https://i.upmath.me/svg/A%20%5Crightarrow%20X%20Y%20Z" alt="A \rightarrow X Y Z" /> is equivalent to:
+
+<img src="https://i.upmath.me/svg/A%20%5Crightarrow%20XWZ" alt="A \rightarrow XWZ" />
+
+<img src="https://i.upmath.me/svg/W%20%5Crightarrow%20Y%20%7C%20%5Cepsilon" alt="W \rightarrow Y | \epsilon" />
+
+<img src="https://i.upmath.me/svg/A%20%5Crightarrow%20X%20%5C%7BY%20Z%5C%7D" alt="A \rightarrow X \{Y Z\}" /> is equivalent to:
+
+<img src="https://i.upmath.me/svg/A%20%5Crightarrow%20XW" alt="A \rightarrow XW" />
+
+<img src="https://i.upmath.me/svg/W%20%5Crightarrow%20YZW%20%7C%20%5Cepsilon" alt="W \rightarrow YZW | \epsilon" />
+
+## 4.2.5
+
+I guess there is a mistake in the first production rule. If so, the simplified grammar is as follows
+
+<img src="https://i.upmath.me/svg/stmt%20%5Crightarrow%20%7B%5Cbf%20if%7D%20%5C%20expr%20%5C%20%7B%5Cbf%20then%7D%20%5C%20stmt%20%5C%20%5B%7B%5Cbf%20else%7D%20%5C%20stmt%5D%20%5C%20%7C%20%5C%20%7B%5Cbf%20begin%7D%20%5C%20stmtList%20%5C%20%7B%5Cbf%20end%7D" alt="stmt \rightarrow {\bf if} \ expr \ {\bf then} \ stmt \ [{\bf else} \ stmt] \ | \ {\bf begin} \ stmtList \ {\bf end}" />
+
+<img src="https://i.upmath.me/svg/stmtList%20%5Crightarrow%20stmt%20%5C%20%5C%7B%20%3B%20stmt%20%5C%7D" alt="stmtList \rightarrow stmt \ \{ ; stmt \}" />
+
+## 4.2.6
+
+A regular expression can be converted into a context-free grammar.
+
+## 4.2.7
+
+A [solution](https://www.cs.scranton.edu/~mccloske/courses/cmps260/cfg_remove_useless.html) on the Internet.
+

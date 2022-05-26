@@ -161,3 +161,35 @@ $$X \rightarrow 0Z1X | \epsilon$$
 
 $$Z \rightarrow 0Z | \epsilon$$
 
+## 4.2.4
+
+Proof:
+
+$$A \rightarrow X Y Z$$ is equivalent to:
+
+$$A \rightarrow XWZ$$
+
+$$W \rightarrow Y | \epsilon$$
+
+$$A \rightarrow X \{Y Z\}$$ is equivalent to:
+
+$$A \rightarrow XW$$
+
+$$W \rightarrow YZW | \epsilon$$
+
+## 4.2.5
+
+I guess there is a mistake in the first production rule. If so, the simplified grammar is as follows
+
+$$stmt \rightarrow {\bf if} \ expr \ {\bf then} \ stmt \ [{\bf else} \ stmt] \ | \ {\bf begin} \ stmtList \ {\bf end}$$
+
+$$stmtList \rightarrow stmt \ \{ ; stmt \}$$
+
+## 4.2.6
+
+A regular expression can be converted into a context-free grammar.
+
+## 4.2.7
+
+A [solution](https://www.cs.scranton.edu/~mccloske/courses/cmps260/cfg_remove_useless.html) on the Internet.
+
