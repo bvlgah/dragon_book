@@ -130,3 +130,12 @@ $$
 
 It is suitable for top-down parsing.
 
+## 4.3.3
+
+The grammar is still ambiguous because the following two parse tree can be
+generated from the same sentence:
+
+![4.3.3 parse tree a](assets/4_3_3_parse_tree_a.png)
+
+![4.3.3 parse tree b](assets/4_3_3_parse_tree_b.png)
+
