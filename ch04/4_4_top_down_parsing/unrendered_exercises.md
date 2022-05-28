@@ -157,3 +157,53 @@ g)
 | bterm   | {**not** ( **true** **false**} | {**and** **or** ) $} |
 | bfactor | {**not** ( **true** **false**} | {**and** **or** ) $} |
 
+## 4.4.6
+
+A grammar is  *ε-free* if no production body is ε (called an *ε-production*).
+
+a)
+
+For every production rule α which has an ε body, create new rules by copying original rules where α appears and removing α,
+and remove every ε rule.
+
+b)
+
+For $$S \rightarrow aSbS \ | \ bSaS \ | \ \epsilon$$, create two new rules $$S \rightarrow ab$$
+and $$S \rightarrow ba$$, and remove $$S \rightarrow \epsilon$$. Therefore, the original grammar
+is equivalent to:
+
+$$S \rightarrow aSbS \ | \ bSaS \ | \ ab \ | \ ba$$
+
+I also found a similar [algorithm](http://www.cs.um.edu.mt/gordon.pace/Research/Software/Relic/Transformations/RG/epsilon-free.html) on the Internet.
+
+## 4.4.7
+
+A *single production* is a production whose body is a single nonterminal, i.e., a production of the
+form $$A \rightarrow B$$.
+
+a)
+
+First eliminate ε-productions, and remove cyclic rules like $$A \rightarrow A$$ (if any),
+finally replace any single non-terminal with its rules until no single production.
+
+b)
+
+Firstly, expand $$T \rightarrow F$$ to $$T \rightarrow (E) \ | \ {\bf id}$$. Then, expand
+$$E \rightarrow T$$ to $$E \rightarrow T*F \ | \ (E) \ | \ {\bf id}$$.
+
+After conversion, the grammar is as follows:
+
+$$
+\begin{array}{lll}
+E & \rightarrow & E + T \ | \ T * F \ | \ (E) \ | \ id \\
+T & \rightarrow & T * F \ | \ (E) \ | \ id \\
+F & \rightarrow & (E) \ | \ id
+\end{array}
+$$
+
+c)
+
+Since the converted grammar has no single production, any non-terminal A derives αAβ where α and β
+is any grammar symbol. Because there is no ε production, α and β never derive ε. Therefore, the
+grammar has no cycles.
+

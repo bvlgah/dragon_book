@@ -157,3 +157,53 @@ g)
 | bterm   | {**not** ( **true** **false**} | {**and** **or** ) $} |
 | bfactor | {**not** ( **true** **false**} | {**and** **or** ) $} |
 
+## 4.4.6
+
+A grammar is  *ε-free* if no production body is ε (called an *ε-production*).
+
+a)
+
+For every production rule α which has an ε body, create new rules by copying original rules where α appears and removing α,
+and remove every ε rule.
+
+b)
+
+For <img src="https://i.upmath.me/svg/S%20%5Crightarrow%20aSbS%20%5C%20%7C%20%5C%20bSaS%20%5C%20%7C%20%5C%20%5Cepsilon" alt="S \rightarrow aSbS \ | \ bSaS \ | \ \epsilon" />, create two new rules <img src="https://i.upmath.me/svg/S%20%5Crightarrow%20ab" alt="S \rightarrow ab" />
+and <img src="https://i.upmath.me/svg/S%20%5Crightarrow%20ba" alt="S \rightarrow ba" />, and remove <img src="https://i.upmath.me/svg/S%20%5Crightarrow%20%5Cepsilon" alt="S \rightarrow \epsilon" />. Therefore, the original grammar
+is equivalent to:
+
+<img src="https://i.upmath.me/svg/S%20%5Crightarrow%20aSbS%20%5C%20%7C%20%5C%20bSaS%20%5C%20%7C%20%5C%20ab%20%5C%20%7C%20%5C%20ba" alt="S \rightarrow aSbS \ | \ bSaS \ | \ ab \ | \ ba" />
+
+I also found a similar [algorithm](http://www.cs.um.edu.mt/gordon.pace/Research/Software/Relic/Transformations/RG/epsilon-free.html) on the Internet.
+
+## 4.4.7
+
+A *single production* is a production whose body is a single nonterminal, i.e., a production of the
+form <img src="https://i.upmath.me/svg/A%20%5Crightarrow%20B" alt="A \rightarrow B" />.
+
+a)
+
+First eliminate ε-productions, and remove cyclic rules like <img src="https://i.upmath.me/svg/A%20%5Crightarrow%20A" alt="A \rightarrow A" /> (if any),
+finally replace any single non-terminal with its rules until no single production.
+
+b)
+
+Firstly, expand <img src="https://i.upmath.me/svg/T%20%5Crightarrow%20F" alt="T \rightarrow F" /> to <img src="https://i.upmath.me/svg/T%20%5Crightarrow%20(E)%20%5C%20%7C%20%5C%20%7B%5Cbf%20id%7D" alt="T \rightarrow (E) \ | \ {\bf id}" />. Then, expand
+<img src="https://i.upmath.me/svg/E%20%5Crightarrow%20T" alt="E \rightarrow T" /> to <img src="https://i.upmath.me/svg/E%20%5Crightarrow%20T*F%20%5C%20%7C%20%5C%20(E)%20%5C%20%7C%20%5C%20%7B%5Cbf%20id%7D" alt="E \rightarrow T*F \ | \ (E) \ | \ {\bf id}" />.
+
+After conversion, the grammar is as follows:
+
+<img src="https://i.upmath.me/svg/%0A%5Cbegin%7Barray%7D%7Blll%7D%0AE%20%26%20%5Crightarrow%20%26%20E%20%2B%20T%20%5C%20%7C%20%5C%20T%20*%20F%20%5C%20%7C%20%5C%20(E)%20%5C%20%7C%20%5C%20id%20%5C%5C%0AT%20%26%20%5Crightarrow%20%26%20T%20*%20F%20%5C%20%7C%20%5C%20(E)%20%5C%20%7C%20%5C%20id%20%5C%5C%0AF%20%26%20%5Crightarrow%20%26%20(E)%20%5C%20%7C%20%5C%20id%0A%5Cend%7Barray%7D%0A" alt="
+\begin{array}{lll}
+E &amp; \rightarrow &amp; E + T \ | \ T * F \ | \ (E) \ | \ id \\
+T &amp; \rightarrow &amp; T * F \ | \ (E) \ | \ id \\
+F &amp; \rightarrow &amp; (E) \ | \ id
+\end{array}
+" />
+
+c)
+
+Since the converted grammar has no single production, any non-terminal A derives αAβ where α and β
+is any grammar symbol. Because there is no ε production, α and β never derive ε. Therefore, the
+grammar has no cycles.
+
