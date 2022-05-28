@@ -82,3 +82,78 @@ $$
 | bterm'       |                     |                      |                            | bterm' -> **and** bfactor bterm' |                               |                   |   | bterm' -> ε |
 | bfactor      | bfactor -> **true** | bfactor -> **false** | bfactor -> **not** bfactor |                                  |                               | bfactor -> (bexpr) |   |             |
 
+## 4.4.2
+
+Is it possible, by modifying the grammar in anyway, to con-struct a predictive parser for the language of Exercise 4.2.1 (post x expressions with operand a)?
+
+$$
+\begin{array}{lll}
+S & \rightarrow & aS' \\
+S' & \rightarrow & aS'TS' | \ \epsilon \\
+T & \rightarrow & +S' \ | \ *S'
+\end{array}
+$$
+
+| Non-terminal | a                        | +                     | *                     | $                           |
+| ------------ | ------------------------ | --------------------- | --------------------- | --------------------------- |
+| $$S$$        | $$S \rightarrow aS'$$    |                       |                       |                             |
+| $$S'$$       | $$S \rightarrow aS'TS'$$ |                       |                       | $$S' \rightarrow \epsilon$$ |
+| $$T$$        |                          | $$T \rightarrow +S'$$ | $$S \rightarrow *S'$$ |                             |
+
+## 4.4.3
+
+Compute FIRST and FOLLOW for the grammar of Exercise 4.2.1.
+
+| Symbol | FIRST | FOLLOW       |
+| ------ | ----- | ------------ |
+| S      | {a}   | {$ a + *}    |
+
+## 4.4.4
+
+Compute FIRST and FOLLOW for each of the grammars of Exercise 4.2.2.
+
+a)
+
+| Symbol | FIRST | FOLLOW |
+| ------ | ----- | ------ |
+| S      | {0}   | {1 $}  |
+
+b)
+
+| Symbol | FIRST   | FOLLOW    |
+| ------ | ------- | --------- |
+| S      | {+ * a} | {+ * a $} |
+
+c)
+
+| Symbol | FIRST | FOLLOW |
+| ------ | ----- | ------ |
+| S      | {(}   | {) $}  |
+
+d)
+
+| Symbol | FIRST | FOLLOW       |
+| ------ | ----- | ------------ |
+| S      | {a (} | {a + ( ) *$} |
+
+e)
+
+| Symbol | FIRST | FOLLOW  |
+| ------ | ----- | ------- |
+| S      | {( a} | {, $}   |
+| L      | {( a} | {) , $} |
+
+f)
+
+| Symbol | FIRST | FOLLOW  |
+| ------ | ----- | ------- |
+| S      | {a b} | {a b $} |
+
+g)
+
+| Symbol  | FIRST                          | FOLLOW               |
+| ------- | ------------------------------ | -------------------- |
+| bexpr   | {**not** ( **true** **false**} | {**and** **or** ) $} |
+| bterm   | {**not** ( **true** **false**} | {**and** **or** ) $} |
+| bfactor | {**not** ( **true** **false**} | {**and** **or** ) $} |
+
