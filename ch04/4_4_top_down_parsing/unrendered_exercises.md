@@ -207,3 +207,114 @@ Since the converted grammar has no single production, any non-terminal A derives
 is any grammar symbol. Because there is no ε production, α and β never derive ε. Therefore, the
 grammar has no cycles.
 
+## 4.4.8
+
+Show how to convert any grammar into a CNF grammar for the same language (with the possible exception of the empty string | no CNF grammar can generate ε).
+
+**Solution**:
+
+First of all, convert any grammar G into an equivalent grammar G' with no single
+productions. For any production rule in G' that is not a CNF, it can be
+represented as:
+
+$$A \rightarrow \alpha \beta$$
+
+Then add to G' the following rules:
+
+$$
+\begin{array}{lll}
+B & \rightarrow & \alpha \\
+C & \rightarrow & \beta
+\end{array}
+$$
+
+Do the above step until the grammar is a CNF grammar.
+
+## 4.4.9
+
+Let S(i, j) is the set of non-terminals that generate the string ai...aj.
+And let M(BC) = A, where B and C are non-terminals of the grammar G and if
+there is a rule in G, A -> BC.
+
+```
+for s in 0 to n - 1
+    for i in 1 to n - s
+        S(i, i + s) = M(S(i, i)S(i + 1, i + s)) ∪ ... ∪ M(S(i, i + s - 1)S(i + s, i + s))
+```
+
+Whether a1a2...an is in the language can be determined by checking whether the
+start symbol is in T1n. If it is, the string is in the language.
+
+## 4.4.10
+
+For every element x of the set of table entry Tij, it also stores how Tij is produced. That is, it records `Tij = Tik Tkj`. Having this information, a parse
+tree can be easily built. The running of constructing the tree for `Tij` is
+`t(Tij) = t(Tik) + t(Tkj) + O(1)`. Then for T1n, `t(T1n) = t(T11) + t(T22) + ... + t(Tnn) + O(n) = O(n)`.
+
+## 4.4.11
+
+I would like to share some general ideas. For every `Tij` and all non-terminals, compute the least number of corrections to make a non-terminal derive the sub-string
+`ai...aj`. I think it is a very costly algorithm.
+
+## 4.4.12
+
+a) Build an error-correcting predictive parsing table for the grammar.
+
+| Symbol   | FIRST              | FOLLOW         |
+| -------- | ------------------ | -------------- |
+| stmt     | {if while begin s} | {; end else $} |
+| stmtTail | {else}             | {; end else $} |
+| list     | {if while begin s} | {end}          |
+| listTail | {;}                | {end}          |
+
+The parse table is as follows:
+
+| Non-Terminal | if                              | e | then | while                   | do | begin                  | end           | s                     | else                  | ;                  | $             |
+| ------------ | ------------------------------- | - | ---- | ----------------------- | -- | ---------------------- | ------------- | --------------------- | --------------------- | ------------------ | ------------- |
+| stmt         | stmt -> if e then stmt stmtTail |   |      | stmt -> while e do stmt |    | stmt -> begin list end | synch         | stmt -> s             | synch                 | synch              | synch         |
+| stmtTail     | synch                           |   |      | synch                   |    | synch                  | stmtTail -> ε | synch                 | stmtTail -> else stmt | stmtTail -> ε      | stmtTail -> ε |
+| list         | list -> stmt listTail           |   |      | list -> stmt listTail   |    | list -> stmt listTail  | synch         | list -> stmt listTail |                       |                    |               |
+| listTail     | synch                           |   |      | synch                   |    | synch                  | listTail -> ε |                       |                       | listTail -> ;list  | synch         |
+
+b) Show the behavior of your parser on the following inputs:
+
+(i) if e then s ; if e then s end
+
+| Stack                     | Input                           | Remark                     |
+| ------------------------: | ------------------------------: | -------------------------- |
+| stmt $                    | if e then s ; if e then s end $ | if is in FIRST(stmt)       |
+| if e then stmt stmtTail $ | if e then s ; if e then s end $ |                            |
+| e then stmt stmtTail $    | e then s ; if e then s end $    |                            |
+| then stmt stmtTail $      | then s ; if e then s end $      |                            |
+| stmt stmtTail $           | s ; if e then s end $           | s is in FIRST(stmt)        |
+| s stmtTail $              | s ; if e then s end $           |                            |
+| stmtTail $                | ; if e then s end $             | ; is in FIRST(stmt)        |
+| $                         | ; if e then s end $             | error, skip all left input |
+
+(ii) while e do begin s ; if e then s ; end
+
+| Stack                         | Input                                    | Remark                  |
+| ----------------------------: | ---------------------------------------: | ----------------------- |
+| stmt $                        | while e do begin s ; if e then s ; end $ | while is in FIRST(stmt) |
+| while e do stmt $             | while e do begin s ; if e then s ; end $ |                         |
+| e do stmt $                   | e do begin s ; if e then s ; end $       |                         |
+| do stmt $                     | do begin s ; if e then s ; end $         |                         |
+| stmt $                        | begin s ; if e then s ; end $            | begin is in FIRST(stmt) |
+| begin list end $              | begin s ; if e then s ; end $            |                         |
+| list end $                    | s ; if e then s ; end $                  | s is in FIRST(list)     |
+| stmt listTail end $           | s ; if e then s ; end $                  | s is in FIRST(stmt)     |
+| s listTail end $              | s ; if e then s ; end $                  |                         |
+| listTail end $                | ; if e then s ; end $                    | ; is in FIRST(listTail) |
+| ; list end $                  | ; if e then s ; end $                    |                         |
+| list end $                    | if e then s ; end $                      | if is in FIRST(list)    |
+| stmt listTail end $           | if e then s ; end $                      | if is in FIRST(stmt)    |
+| if e then stmt stmtTail end $ | if e then s ; end $                      |                         |
+| e then stmt stmtTail end $    | e then s ; end $                         |                         |
+| then stmt stmtTail end $      | then s ; end $                           |                         |
+| stmt stmtTail end $           | s ; end $                                | s is in FIRST(stmt)     |
+| s stmtTail end $              | s ; end $                                |                         |
+| stmtTail end $                | ; end $                                  | ; is in FIRST(stmtTail) |
+| end $                         | ; end $                                  | error, pop(;)           |
+| end $                         | end $                                    |                         |
+| $                             | $                                        |                         |
+
