@@ -5,20 +5,20 @@
 For the grammar `S -> 0 S 1 | 0 1` of Exercise 4.2.2(a), indicate the handle
 in each of the following right-sentential forms:
 
-a) 00<u>01</u>11.
+a) 00<ins>01</ins>11.
 
-b) 0<u>0S1</u>1.
+b) 0<ins>0S1</ins>1.
 
 ## 4.5.2
 
 Repeat Exercise 4.5.1 for the grammar `S -> SS+ | SS* | a` of Exercise 4.2.1
 and the following right-sentential forms:
 
-a) S<u>SS+</u>a*+.
+a) S<ins>SS+</ins>a*+.
 
-b) <u>SS+</u>a*a+.
+b) <ins>SS+</ins>a*a+.
 
-c) <u>a</u>aa*a++.
+c) <ins>a</ins>aa*a++.
 
 ## 4.5.3
 
