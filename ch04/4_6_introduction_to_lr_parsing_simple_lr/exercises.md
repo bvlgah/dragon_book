@@ -362,5 +362,5 @@ the NFA that comes from the valid items for a grammar produces
 the LR(0) sets of items.
 
 A general idea:
-- ε transition is equivalent to CLOSURE.
+- An ε-closure is equivalent to an LR(0) CLOSURE.
 
