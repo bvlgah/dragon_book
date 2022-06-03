@@ -1,0 +1,22 @@
+digraph nfa {
+    rankdir = LR;
+
+    "S' -> ·S" -> "S -> ·SS+" [label = "ε"]
+    "S' -> ·S" -> "S -> ·SS*" [label = "ε"]
+    "S' -> ·S" -> "S -> ·a" [label = "ε"]
+    "S' -> ·S" -> "S' -> S·" [label = "S"]
+    "S -> ·SS+" -> "S -> S·S+" [label = "S"]
+    "S -> ·SS*" -> "S -> S·S*" [label = "S"]
+    "S -> ·a" -> "S -> a·" [label = "a"]
+    "S -> S·S+" -> "S -> ·SS+" [label = "ε"]
+    "S -> S·S+" -> "S -> ·SS*" [label = "ε"]
+    "S -> S·S+" -> "S -> ·a" [label = "ε"]
+    "S -> S·S*" -> "S -> ·SS+" [label = "ε"]
+    "S -> S·S*" -> "S -> ·SS*" [label = "ε"]
+    "S -> S·S*" -> "S -> ·a" [label = "ε"]
+    "S -> S·S+" -> "S -> SS·+" [label = "S"]
+    "S -> S·S*" -> "S -> SS·*" [label = "S"]
+    "S -> SS·+" -> "S -> SS+·" [label = "+"]
+    "S -> SS·*" -> "S -> SS*·" [label = "*"]
+}
+

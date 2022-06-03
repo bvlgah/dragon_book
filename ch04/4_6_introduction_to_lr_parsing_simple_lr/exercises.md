@@ -262,3 +262,105 @@ g)
 | 13    | r1  | s11 |     |    | r1  |      |       | r1  |       |       |         |
 | 14    | r3  | r3  |     |    | r3  |      |       | r3  |       |       |         |
 
+## 4.6.5
+
+Show that the following grammar:
+
+S -> AaAb | BbBa
+
+A -> ε
+
+B -> ε
+
+is LL(1) but not SLR(1).
+
+The above grammar is LL(1) since it satisfies the conditions on pp. 223.
+
+| Symbol | FIRST | FOLLOW |
+| ------ | ----- | ------ |
+| S      | {a b} | {$}    |
+| A      | {ε}   | {a b}  |
+| B      | {ε}   | {a b}  |
+
+| State         | Set of items                                                       |
+| ------------- | ------------------------------------------------------------------ |
+| I<sub>0</sub> | S' -> ·S <br> S -> ·AaAb <br> S -> ·BbBa <br> A -> ε· <br> B -> ε· |
+| I<sub>1</sub> | S' -> S·                                                           |
+| I<sub>2</sub> | S -> A·aAb                                                         |
+| I<sub>3</sub> | S -> B·bBa                                                         |
+| I<sub>4</sub> | S -> Aa·Ab <br> A -> ε·                                            |
+| I<sub>5</sub> | S -> Bb·Ba <br> B -> ε·                                            |
+| I<sub>6</sub> | S -> AaA·b                                                         |
+| I<sub>7</sub> | S -> BbB·a                                                         |
+| I<sub>8</sub> | S -> AaAb·                                                         |
+| I<sub>9</sub> | S -> BbBa·                                                         |
+
+The grammar is not SLR(1) because it has a reduce/reduce conflicts:
+
+- State 0 can reduce by `A -> ε` or `A -> ε` on input `a` or `b`.
+
+## 4.6.6
+
+Show that the following grammar:
+
+S -> S A | A
+
+A -> a
+
+is SLR(1) but not LL(1).
+
+| Symbol | FIRST | FOLLOW |
+| ------ | ----- | ------ |
+| S      | {a}   | {a $}  |
+| A      | {a}   | {a $}  |
+
+Because `a` is both in `FISRT(S)` and `FIRST(A)`, it cannot be
+determined which one of `S -> S A` and `S -> A` should be chosen
+for an LL(1) parser.
+
+| State         | Set of items                                     |
+| ------------- | ------------------------------------------------ |
+| I<sub>0</sub> | S' -> ·S <br> S -> ·SA <br> S -> ·A <br> A -> ·a |
+| I<sub>1</sub> | A -> a·                                          |
+| I<sub>2</sub> | S' -> S· <br> S -> S·A <br> A -> ·a              |
+| I<sub>3</sub> | S -> A·                                          |
+| I<sub>4</sub> | S -> SA·                                         |
+
+| State | a  | $   | S | A |
+| ----- | -- | --- |   |   |
+| 0     | s1 |     | 2 | 3 |
+| 1     | r3 | r3  |   |   |
+| 2     | s1 | acc |   | 4 |
+| 3     | r2 | r2  |   |   |
+| 4     | r1 | r1  |   |   |
+
+The grammar is SLR(1) because there is no shift/reduce or reduce/reduce conflict
+in the SLR(1) parsing table.
+
+## 4.6.8
+
+We suggested that individual items could be regarded as states of a
+nondeterministic finite automaton, while sets of valid items are
+the states of a deterministic finite automaton (see the box on
+"Items as States of an NFA" in Section 4.6.5). For the grammar
+`S -> S S + | S S * | a` of Exercise 4.2.1:
+
+a) Draw the transition diagram (NFA) for the valid items of this
+grammar according to the rule given in the box cited above.
+
+![Exercise 4.6.8 NFA](assets/4_6_8_nfa.svg)
+
+b) Apply the subset construction (Algorithm 3.20) to your NFA from
+part (a). How does the resulting DFA compare to the set of LR(0)
+items for the grammar?
+
+The resulting DFA is equivalent to the set of LR(0) items.
+See [Exercise 4.6.2](#462).
+
+c) Show that in all cases, the subset construction applied to
+the NFA that comes from the valid items for a grammar produces
+the LR(0) sets of items.
+
+A general idea:
+- ε transition is equivalent to CLOSURE.
+
