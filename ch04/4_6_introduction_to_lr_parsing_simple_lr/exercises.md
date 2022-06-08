@@ -366,6 +366,7 @@ Overall, there are `1 + 2 * n + n * (n - 1) + 2^n - n * (n - 1) - 1 = 2^n + n^2 
 c)
 
 | Symbol | FIRST                              | FOLLOW               |
+| ------ | ---------------------------------- | -------------------- |
 | S      | {ai} for 1 <= i <= n               | {$}                  |
 | Ai     | {aj} for 1 <= i, j <= n and i != j | {bi} for 1 <= i <= n |
 
