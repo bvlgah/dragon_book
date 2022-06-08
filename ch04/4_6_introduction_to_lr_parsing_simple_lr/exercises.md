@@ -337,6 +337,42 @@ for an LL(1) parser.
 The grammar is SLR(1) because there is no shift/reduce or reduce/reduce conflict
 in the SLR(1) parsing table.
 
+## 4.6.7
+
+a)
+
+There are `n` productions for `S -> Ai bi` for `1 <= i <= n`, both `n^2 - n`
+productions for `Ai -> aj Ai` and `Ai -> ai` for `1 <= i, j <= n` and `i != j`.
+In total, there are `2n^2 - n` productions.
+
+b)
+
+For the augmented grammar `S'`, the initial state has `S' -> ·S`,
+`S -> ·Ai bi` for `1 <= i <= n`, `Ai -> ·aj Ai` and `Ai -> ·aj`
+for `1 <= i, j <= n` and `i != j`, and it has `2n^2 - n + 1` items.
+
+There are states with item `S -> Ai·bi` and `S -> Ai bi·` for
+`1 <= i <= n` separately. So, `2n` states in total.
+
+There are `n * (n - 1)` states with item `Ai -> aj Ai·` for
+`1 <= i, j <= n` and `i != j`.
+
+There are states with item `Ai -> aj·Ai`, `Ai -> ·ak Ai`, `Ai-> ·al`
+and `Ai -> aj·`. In total, `2^n - 1` combinations.
+
+Overall, there are `1 + 2 * n + n * (n - 1) + 2^n - n * (n - 1) - 1 = 2^n + n^2 + n`.
+
+c)
+
+| Symbol | FIRST                              | FOLLOW               |
+| S      | {ai} for 1 <= i <= n               | {$}                  |
+| Ai     | {aj} for 1 <= i, j <= n and i != j | {bi} for 1 <= i <= n |
+
+There are no shift/reduce or reduce/reduce conflicts with the SLR(1) parsing table.
+
+For a grammar involving `O(n)` symbols like the one of the question,
+its parsing table has `O(2^n)` entries.
+
 ## 4.6.8
 
 We suggested that individual items could be regarded as states of a
@@ -363,4 +399,93 @@ the LR(0) sets of items.
 
 A general idea:
 - An ε-closure is equivalent to an LR(0) CLOSURE.
+
+## 4.6.9
+
+The following is an ambiguous grammar:
+
+S -> AS | b
+
+A -> SA | a
+
+Construct for this grammar its collection of sets of LR(0) items.
+If we try to build an LR-parsing table for the grammar, there are
+certain conflicting actions. What are they? Suppose we tried to
+use the parsing table by non-deterministically choosing a possible
+action whenever there is a conflict. Show all the possible sequences
+of actions on input `abab`.
+
+| Symbol | FIRST | FOLLOW  |
+| ------ | ----- | ------- |
+| S      | {a b} | {a b $} |
+| A      | {a b} | {a b}   |
+
+| State         | Set of items                                                                 |
+| ------------- | ---------------------------------------------------------------------------- |
+| I<sub>0</sub> | S' -> ·S <br> S -> ·AS <br> S -> ·b <br> A -> ·SA <br> A -> ·a               |
+| I<sub>1</sub> | A -> a·                                                                      |
+| I<sub>2</sub> | S -> b·                                                                      |
+| I<sub>3</sub> | S' -> S· <br> A -> S·A <br> A -> ·SA <br> A -> ·a <br> S -> ·AS <br> S -> ·b |
+| I<sub>4</sub> | S -> A·S <br> S -> ·AS <br> S -> ·b <br> A -> ·SA <br> A -> ·a               |
+| I<sub>5</sub> | A -> S·A <br> A -> ·SA <br> A -> ·a <br> S -> ·AS <br> S -> ·b               |
+| I<sub>6</sub> | A -> SA· <br> S -> A·S <br> S -> ·AS <br> S -> ·b <br> A -> ·SA <br> A -> ·a |
+| I<sub>7</sub> | S -> AS· <br> A -> S·A <br> A -> ·SA <br> A -> ·a <br> S -> ·AS <br> S -> ·b |
+
+| State | a          | b          | $   | S | A |
+| ----- | ---------- | ---------- | --- | - | - |
+| 0     | s1         | s2         |     | 3 | 4 |
+| 1     | r4         | r4         |     |   |   |
+| 2     | r2         | r2         | r2  |   |   |
+| 3     | s1         | s2         | acc | 5 | 6 |
+| 4     | s1         | s2         |     | 7 | 4 |
+| 5     | s1         | s2         |     | 5 | 6 |
+| 6     | s1 <br> r3 | s2 <br> r3 |     | 7 | 4 |
+| 7     | s1 <br> r1 | s2 <br> r1 | r1  | 5 | 6 |
+
+Possibility #1
+
+| Stack | Symbols | Input | Action                                    |
+| :---- | :------ | ----: | ----------------------------------------- |
+| 0     |         | abab$ | shift                                     |
+| 01    | a       | bab$  | reduce by `A -> a`                        |
+| 04    | A       | bab$  | shift                                     |
+| 042   | Ab      | ab$   | reduce by `S -> b`                        |
+| 047   | AS      | ab$   | conflict, choose shift                    |
+| 0471  | ASa     | b$    | reduce by `A -> a`                        |
+| 0476  | ASA     | b$    | Conflict, choose shift                    |
+| 04762 | ASAb    | $     | reduce by `S -> b`                        |
+| 04767 | ASAS    | $     | reduce by `S - AS`                        |
+| 0475  | ASS     | $     | error, state 5 has no action on input `$` |
+
+Possibility #2
+
+| Stack | Symbols | Input | Action                               |
+| :---- | :------ | ----: | ------------------------------------ |
+| 0     |         | abab$ | shift                                |
+| 01    | a       | bab$  | reduce by `A -> a`                   |
+| 04    | A       | bab$  | shift                                |
+| 042   | Ab      | ab$   | reduce by `S -> b`                   |
+| 047   | AS      | ab$   | conflict, choose shift               |
+| 0471  | ASa     | b$    | reduce by `A -> a`                   |
+| 0476  | ASA     | b$    | Conflict, choose reduce by `A -> SA` |
+| 044   | AA      | b$    | shift                                |
+| 0442  | AAb     | $     | reduce by `S -> b`                   |
+| 0447  | AAS     | $     | reduce by `S -> AS`                  |
+| 047   | AS      | $     | reduce by `S -> AS`                  |
+| 03    | S       | $     | accept                               |
+
+Possibility #3
+
+| Stack | Symbols | Input | Action                                    |
+| :---- | :------ | ----: | ----------------------------------------- |
+| 0     |         | abab$ | shift                                     |
+| 01    | a       | bab$  | reduce by `A -> a`                        |
+| 04    | A       | bab$  | shift                                     |
+| 042   | Ab      | ab$   | reduce by `S -> b`                        |
+| 047   | AS      | ab$   | conflict, choose reduce by `S -> AS`      |
+| 03    | S       | ab$   | shift                                     |
+| 031   | Sa      | b$    | reduce by `A -> a`                        |
+| 035   | SA      | b$    | shift                                     |
+| 0352  | SAb     | $     | reduce by `S -> b`                        |
+| 0355  | SAS     | $     | error, state 5 has no action on input `$` |
 
