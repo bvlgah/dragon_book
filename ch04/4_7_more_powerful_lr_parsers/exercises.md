@@ -357,7 +357,7 @@ Answer:
 
 There is no shift/reduce or reduce/reduce conflict, so the grammar is LR(1).
 
-As for the LALR(1) sets of items, the above `I<sub>2</sub>` and `I<sub>6</sub>` can be merged.
+As for the LALR(1) sets of items, the above `I2` and `I6` can be merged.
 The new state `2,6` has a reduce/reduce conflict:
 
 - It can reduce by `A -> d` or `B -> d` on input `a` or `c`.
