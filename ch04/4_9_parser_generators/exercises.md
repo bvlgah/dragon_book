@@ -6,7 +6,7 @@ Three files:
 
 - [boolean_lexer.l](boolean_lexer.l)
 
-- [boolean_parser.y](booean_parser.y)
+- [boolean_parser.y](boolean_parser.y)
 
 - [boolean_main.c](boolean_main.c)
 
